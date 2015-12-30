@@ -6,14 +6,14 @@
     android:layout_height="match_parent">
 
 
-    <ListView
-        android:id="@+id/list_topic"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:listSelector="@android:color/transparent"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:layout_height="match_parent" />
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        card_view:cardBackgroundColor="@color/white"
+        >
+    </android.support.v7.widget.CardView>
+
 
 
 

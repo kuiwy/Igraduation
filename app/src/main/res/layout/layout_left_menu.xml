@@ -1,0 +1,101 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="70dp"
+    android:background="@mipmap/bg3"
+    >
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:paddingLeft="30dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--头像，昵称信息-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <hello.wyk.graduation.widget.RoundAngleImageView
+                android:id="@+id/iv_bottom"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/img_head"
+                app:roundWidth="25dp"
+                app:roundHeight="25dp"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:text="想做很多事"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:text="哼哼"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/sidebar_signature_nor"/>
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:textSize="13sp"
+                android:textColor="#676767"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_width="match_parent"
+                android:layout_marginRight="120dp"
+                android:layout_height="wrap_content"
+                android:text="黄色的树林里分出两条路 我选择了人迹更少的一条 从此决定了我一生的道路!"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--底部功能条-->
+    <include layout="@layout/left_view_bottom_layout"
+        android:id="@+id/bottom_view"
+        />
+    <!--中间列表-->
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_view"
+        android:layout_below="@id/ll1"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="70dp"
+        android:cacheColorHint="#00000000"
+        android:listSelector="@drawable/lv_click_selector"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:textColor="#ffffff" />
+</RelativeLayout>

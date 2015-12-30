@@ -35,7 +35,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
         }
 
         @Override
-        public Object getItem(int position) {
+        public T getItem(int position) {
             if(mListData!=null){
                 return mListData.get(position);
             }

@@ -22,7 +22,7 @@ public class TopicAdapter extends MyBaseAdapter<String> {
         ViewHolder holder = null;
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(
-                    R.layout.list_topic_item, parent, false);
+                    R.layout.layout_left_menu, parent, false);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

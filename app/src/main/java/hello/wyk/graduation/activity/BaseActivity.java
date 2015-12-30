@@ -1,21 +1,30 @@
 package hello.wyk.graduation.activity;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 
+import hello.wyk.graduation.R;
 import hello.wyk.graduation.util.AppManager;
+import hello.wyk.graduation.util.SystemBarTintManager;
 
 /**
  * 所有Activity的基类
- *
+ * <p/>
  * Created by wyk on 2015/12/3.
  */
 public abstract class BaseActivity extends FragmentActivity {
@@ -45,7 +54,72 @@ public abstract class BaseActivity extends FragmentActivity {
      * 在setContentView之前的操作
      */
     public void setViewBefore() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+    }
 
+    public void setStatusColor() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setTintColor(Color.BLACK);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    protected void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
+
+    /**
+     * 设置沉浸式状态栏
+     */
+    protected void setStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            final ViewGroup linear_bar = (ViewGroup) findViewById(R.id.rl_title);
+            final int statusHeight = getStatusBarHeight();
+            linear_bar.post(new Runnable() {
+                @Override
+                public void run() {
+                    int titleHeight = linear_bar.getHeight();
+                    android.widget.LinearLayout.LayoutParams params = (android.widget.LinearLayout.LayoutParams) linear_bar.getLayoutParams();
+                    params.height = statusHeight + titleHeight;
+                    linear_bar.setLayoutParams(params);
+                }
+            });
+        }
+    }
+
+    /**
+     * 获取状态栏的高度
+     *
+     * @return 状态栏的高度
+     */
+    protected int getStatusBarHeight() {
+        try {
+            Class<?> c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = Integer.parseInt(field.get(obj).toString());
+            return getResources().getDimensionPixelSize(x);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     protected String TAG;
@@ -107,7 +181,6 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     /**
-     *
      * @param cls 跳转到的下一个Activity
      */
     public void goActivity(Class<?> cls) {
@@ -115,8 +188,7 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     /**
-     *
-     * @param cls 跳转到的下一个Activity
+     * @param cls   跳转到的下一个Activity
      * @param value 携带的Serializable数据
      */
     public void goActivity(Class<?> cls, Serializable value) {
@@ -124,9 +196,8 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     /**
-     *
-     * @param cls 跳转到的下一个Activity
-     * @param value 携带的Serializable数据
+     * @param cls         跳转到的下一个Activity
+     * @param value       携带的Serializable数据
      * @param requestCode 请求码
      */
     public void goActivity(Class<?> cls, Serializable value, int requestCode) {
@@ -134,8 +205,7 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     /**
-     *
-     * @param cls 跳转到的下一个Activity
+     * @param cls   跳转到的下一个Activity
      * @param value 携带的String数据
      */
     public void goActivity(Class<?> cls, String value) {
@@ -143,9 +213,8 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     /**
-     *
-     * @param cls 跳转到的下一个Activity
-     * @param value 携带的String数据
+     * @param cls         跳转到的下一个Activity
+     * @param value       携带的String数据
      * @param requestCode 请求码
      */
     public void goActivity(Class<?> cls, String value, int requestCode) {
@@ -153,8 +222,7 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     /**
-     *
-     * @param cls 跳转到的下一个Activity
+     * @param cls      跳转到的下一个Activity
      * @param strValue 携带的String数据
      * @param serValue 携带的Serializable数据
      */
@@ -163,10 +231,9 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     /**
-     *
-     * @param cls 跳转到的下一个Activity
-     * @param strValue 携带的String数据
-     * @param serValue 携带的Serializable数据
+     * @param cls         跳转到的下一个Activity
+     * @param strValue    携带的String数据
+     * @param serValue    携带的Serializable数据
      * @param requestCode 请求码，不能为0
      */
     public void goActivity(Class<?> cls, String strValue,
@@ -185,14 +252,17 @@ public abstract class BaseActivity extends FragmentActivity {
 
     /**
      * 获得上个Activity传来的Serializable数据
+     *
      * @return Serializable
      */
     public Serializable getInActivitySerValue() {
         Intent intent = getIntent();
         return intent.getSerializableExtra("putSerValue");
     }
+
     /**
      * 获得上个Activity传来的String数据
+     *
      * @return String
      */
     public String getInActivityStrValue() {

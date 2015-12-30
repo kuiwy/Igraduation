@@ -1,19 +1,40 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<hello.wyk.graduation.widget.DragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dl"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <include layout="@layout/layout_title" />
-
-    <FrameLayout
-        android:background="@color/background_main"
-        android:id="@+id/fl_content"
+    android:background="@android:color/transparent"
+    >
+    <!--下层 左边的布局-->
+    <include layout="@layout/layout_left_menu"/>
+    <!--上层 右边的主布局-->
+    <hello.wyk.graduation.widget.CustomRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:id="@+id/rl_title"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="bottom"
+                android:background="#00E3F2"
+                >
+                <include layout="@layout/layout_main_title"/>
+            </RelativeLayout>
+            <!--中间内容后面放入Fragment-->
+            <FrameLayout
+                android:id="@+id/fl_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#FAFAFA"
+                >
 
-    <include layout="@layout/layout_menu_bar" />
-</LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </hello.wyk.graduation.widget.CustomRelativeLayout>
+</hello.wyk.graduation.widget.DragLayout>
