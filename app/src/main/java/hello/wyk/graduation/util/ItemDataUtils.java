@@ -19,7 +19,7 @@ import hello.wyk.graduation.R;
 public class ItemDataUtils {
     public static List<LeftMenuItemObj> getItemBeans(){
         List<LeftMenuItemObj> itemBeans=new ArrayList<>();
-        itemBeans.add(new LeftMenuItemObj(R.mipmap.sidebar_purse,"主页",false));
+        itemBeans.add(new LeftMenuItemObj(R.mipmap.ic_home_black_24dp,"主页",false));
         itemBeans.add(new LeftMenuItemObj(R.mipmap.sidebar_decoration,"知识点练习",false));
         itemBeans.add(new LeftMenuItemObj(R.mipmap.sidebar_favorit,"我的收藏",false));
         itemBeans.add(new LeftMenuItemObj(R.mipmap.sidebar_album,"提问区",false));

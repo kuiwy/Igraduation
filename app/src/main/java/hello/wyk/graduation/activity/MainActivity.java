@@ -44,7 +44,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         FrameLayout fl_content = (FrameLayout) findViewById(R.id.fl_content);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(fl_content.getId(), new MainFragment()).commit();
-
     }
 
     @Override
@@ -82,45 +81,4 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 break;
         }
     }
-
-//    private void tabSelected(int position) {
-//        tv_menu1.setSelected(false);
-//        tv_menu2.setSelected(false);
-//        tv_menu3.setSelected(false);
-//        switch (position) {
-//            case 1:
-//                if (myFragment1 == null) {
-//                    myFragment1 = new MyFragment1();
-//                }
-//                switchFragment(myFragment1);
-//                tv_menu1.setSelected(true);
-//                break;
-//            case 2:
-//                if (myFragment2 == null) {
-//                    myFragment2 = new MyFragment2();
-//                }
-//                switchFragment(myFragment2);
-//                tv_menu2.setSelected(true);
-//                break;
-//            case 3:
-//                if (myFragment3 == null) {
-//                    myFragment3 = new MyFragment3();
-//                }
-//                switchFragment(myFragment3);
-//                tv_menu3.setSelected(true);
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-//    private void switchFragment(Fragment f) {
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        if (!f.isAdded()) {
-//            transaction.hide(fromF).add(fl_content.getId(), f);
-//        } else {
-//            transaction.hide(fromF).show(f);
-//        }
-//        transaction.commitAllowingStateLoss();
-//        fromF = f;
-//    }
 }

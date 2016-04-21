@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -27,7 +28,7 @@ import hello.wyk.graduation.util.SystemBarTintManager;
  * <p/>
  * Created by wyk on 2015/12/3.
  */
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 布局Id(xml文件)
      *

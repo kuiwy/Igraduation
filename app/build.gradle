@@ -22,8 +22,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:cardview-v7:22.+'
     compile project(':model')
     compile project(':core')
-
+    compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'it.neokree:MaterialNavigationDrawer:1.1'
 }
