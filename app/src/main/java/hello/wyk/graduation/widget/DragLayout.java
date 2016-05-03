@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
@@ -246,6 +245,11 @@ public class DragLayout extends FrameLayout {
      */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if(ev.getAction() == MotionEvent.ACTION_DOWN){
+            float x = ev.getX();
+            if(x>100&&status==Status.Close)
+                requestDisallowInterceptTouchEvent(true);
+        }
         return dragHelper.shouldInterceptTouchEvent(ev) && gestureDetector.onTouchEvent(ev);
     }
 
@@ -294,7 +298,6 @@ public class DragLayout extends FrameLayout {
      */
     private void animateView(float percent) {
         float f1 = 1 - percent * 0.5f;
-        Log.e("--------------------",""+vg_left.getWidth());
         ViewHelper.setTranslationX(vg_left, -vg_left.getWidth() / 2.5f + vg_left.getWidth() / 2.5f * percent);
         if (isShowShadow) {
             //阴影效果视图大小进行缩放

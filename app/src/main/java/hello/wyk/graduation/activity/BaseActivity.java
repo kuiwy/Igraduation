@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 
+import butterknife.ButterKnife;
 import hello.wyk.graduation.R;
 import hello.wyk.graduation.util.AppManager;
 import hello.wyk.graduation.util.SystemBarTintManager;
@@ -39,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 初始化布局文件的View
      */
-    protected abstract void findView();
+    protected void findView(){}
 
     /**
      * 初始化View
@@ -136,6 +137,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContext = this;
         setViewBefore();
         setContentView(getContentViewId());
+        ButterKnife.bind(this);
         findView();
         refreshView();
         addEvent();

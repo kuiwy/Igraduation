@@ -1,27 +1,41 @@
 package hello.wyk.graduation.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.nineoldandroids.view.ViewHelper;
 
+import org.wyk.core.LoginController;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import hello.wyk.graduation.R;
 import hello.wyk.graduation.adapter.LeftMenuAdapter;
 import hello.wyk.graduation.fragment.MainFragment;
 import hello.wyk.graduation.util.ItemDataUtils;
 import hello.wyk.graduation.widget.DragLayout;
+import hello.wyk.graduation.widget.RoundAngleImageView;
 
 
-public class MainActivity extends BaseActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener, LoginController.LoginCallBack {
 
-    private DragLayout dl;
+    @BindView(R.id.iv_bottom)
+    private RoundAngleImageView ivBottom;
+    @BindView(R.id.lv)
     private ListView lv;
-    private LeftMenuAdapter leftMenuAdapter;
-    private ImageView iv_icon, iv_bottom;
+    @BindView(R.id.iv_icon)
+    private RoundAngleImageView ivIcon;
+    @BindView(R.id.dl)
+    private DragLayout dl;
+    @BindView(R.id.fl_content)
+    private FrameLayout flContent;
 
+    private LeftMenuAdapter leftMenuAdapter;
 
 
     @Override
@@ -29,26 +43,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         return R.layout.activity_main;
     }
 
-    public void findView() {
-        dl = (DragLayout) findViewById(R.id.dl);
-        iv_icon = (ImageView) findViewById(R.id.iv_icon);
-        iv_bottom = (ImageView) findViewById(R.id.iv_bottom);
-        lv = (ListView) findViewById(R.id.lv);
-    }
-
     @Override
     public void refreshView() {
         setStatusBar();
         leftMenuAdapter = new LeftMenuAdapter(this, ItemDataUtils.getItemBeans());
         lv.setAdapter(leftMenuAdapter);
-        FrameLayout fl_content = (FrameLayout) findViewById(R.id.fl_content);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(fl_content.getId(), new MainFragment()).commit();
+        transaction.add(flContent.getId(), new MainFragment()).commit();
     }
 
     @Override
     public void addEvent() {
-        iv_icon.setOnClickListener(this);
         initDragLayout();
     }
 
@@ -58,6 +63,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             @Override
             public void onOpen() {
             }
+
             //界面关闭的时候
             @Override
             public void onClose() {
@@ -66,19 +72,29 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             //界面滑动的时候
             @Override
             public void onDrag(float percent) {
-                ViewHelper.setAlpha(iv_icon, 1 - percent);
+                ViewHelper.setAlpha(ivIcon, 1 - percent);
             }
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_icon:
-                dl.open();
+    @OnClick({R.id.iv_bottom, R.id.iv_icon})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_bottom:
                 break;
-            default:
+            case R.id.iv_icon:
                 break;
         }
     }
+
+    @Override
+    public void loginSuccess(String s) {
+        Toast.makeText(this, "登录成功  " + s, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void loginFailure(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+    }
+
 }

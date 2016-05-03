@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
 import hello.wyk.graduation.activity.BaseActivity;
 
 /**
@@ -28,7 +29,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 初始化布局文件的View
      */
-    protected abstract void findView();
+    protected void findView(){}
 
     /**
      * 初始化View
@@ -43,6 +44,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(getViewId(), container, false);
+        ButterKnife.bind(this, mView);
         findView();
         refreshView();
         addEvent();
