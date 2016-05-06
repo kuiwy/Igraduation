@@ -8,51 +8,47 @@ import com.wyk.model.UserObj;
 import org.wyk.api.LoginAPI;
 import org.wyk.api.LoginService;
 
-import java.io.IOException;
-
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
 /**
- *
- *
+ * 登录控制类
  * Created by wyk on 2016/4/21.
  */
 public class LoginController {
 
     private LoginAPI loginAPI;
-    private Context mContext;
     private LoginCallBack loginCallBack;
 
-    public LoginController(Context context){
-        mContext = context;
+    public LoginController(Context context) {
         loginAPI = new LoginService().getLoginAPI();
         loginCallBack = (LoginCallBack) context;
     }
 
-    public void login(String username,String password){
-        Log.e("go",username);
-        loginAPI.login(username,password).enqueue(new Callback<UserObj>() {
+    public void login(String username, String password) {
+        loginAPI.login(username, password).enqueue(new Callback<UserObj>() {
             @Override
             public void onResponse(Response<UserObj> response, Retrofit retrofit) {
-                if(response.body() == null||response.body().getId()==-1){
+                if (response.body() == null || response.body().getId() == -1) {
                     loginCallBack.loginFailure("登录失败");
-                }else {
-                    loginCallBack.loginSuccess(response.body().toString());
+                } else {
+                    Common.userObj = response.body();
+                    loginCallBack.loginSuccess();
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.e("login_failure",t.toString());
+                loginCallBack.loginFailure("登录失败");
             }
         });
     }
 
-    public interface LoginCallBack{
-        public void loginSuccess(String s);
-        public void loginFailure(String s);
+    public interface LoginCallBack {
+        void loginSuccess();
+
+        void loginFailure(String s);
     }
 
 }

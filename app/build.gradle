@@ -36,7 +36,14 @@ dependencies {
     compile project(':model')
     compile project(':core')
     compile 'com.android.support:cardview-v7:23.1.1'
-    compile 'it.neokree:MaterialNavigationDrawer:1.1'
+    compile 'com.balysv:material-ripple:1.0.2'
+    compile 'com.android.support:design:22.2.0'
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.8@aar') {
+        transitive = true
+    }
+    compile('com.github.afollestad.material-dialogs:commons:0.8.5.8@aar') {
+        transitive = true
+    }
 
     compile 'com.jakewharton:butterknife:8.0.1'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'

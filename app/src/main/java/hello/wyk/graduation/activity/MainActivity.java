@@ -1,22 +1,29 @@
 package hello.wyk.graduation.activity;
 
-import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.nineoldandroids.view.ViewHelper;
+import com.wyk.model.UserObj;
 
+import org.wyk.core.Common;
 import org.wyk.core.LoginController;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
+import butterknife.OnItemSelected;
 import hello.wyk.graduation.R;
 import hello.wyk.graduation.adapter.LeftMenuAdapter;
 import hello.wyk.graduation.fragment.MainFragment;
+import hello.wyk.graduation.util.DialogUtils;
 import hello.wyk.graduation.util.ItemDataUtils;
 import hello.wyk.graduation.widget.DragLayout;
 import hello.wyk.graduation.widget.RoundAngleImageView;
@@ -25,17 +32,18 @@ import hello.wyk.graduation.widget.RoundAngleImageView;
 public class MainActivity extends BaseActivity implements View.OnClickListener, LoginController.LoginCallBack {
 
     @BindView(R.id.iv_bottom)
-    private RoundAngleImageView ivBottom;
+    RoundAngleImageView ivBottom;
     @BindView(R.id.lv)
-    private ListView lv;
+    ListView lv;
     @BindView(R.id.iv_icon)
-    private RoundAngleImageView ivIcon;
+    RoundAngleImageView ivIcon;
     @BindView(R.id.dl)
-    private DragLayout dl;
+    DragLayout dl;
     @BindView(R.id.fl_content)
-    private FrameLayout flContent;
+    FrameLayout flContent;
 
-    private LeftMenuAdapter leftMenuAdapter;
+    LeftMenuAdapter leftMenuAdapter;
+    LoginController loginController;
 
 
     @Override
@@ -45,6 +53,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void refreshView() {
+        loginController = new LoginController(this);
         setStatusBar();
         leftMenuAdapter = new LeftMenuAdapter(this, ItemDataUtils.getItemBeans());
         lv.setAdapter(leftMenuAdapter);
@@ -77,24 +86,54 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         });
     }
 
-    @OnClick({R.id.iv_bottom, R.id.iv_icon})
+    @OnClick({R.id.layout_head, R.id.iv_icon})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_bottom:
+            case R.id.layout_head:
+                if(Common.userObj==null)
+                    login();
                 break;
             case R.id.iv_icon:
-                break;
+                dl.open();
         }
     }
 
+
+    @OnItemClick(R.id.lv)
+    void OnItemClick(int position) {
+        if(Common.userObj==null&&position!=0){
+            login();
+            return;
+        }
+        showToast(position+"");
+    }
+
+    private void login() {
+        DialogUtils.loginDialog(this, new DialogUtils.DialogCallBack<HashMap<String, String>>() {
+            @Override
+            public void onPositiveButton(HashMap<String, String> map) {
+                super.onPositiveButton(map);
+                loginController.login(map.get("username"), map.get("password"));
+            }
+        });
+    }
+
     @Override
-    public void loginSuccess(String s) {
-        Toast.makeText(this, "登录成功  " + s, Toast.LENGTH_LONG).show();
+    public void loginSuccess() {
+        Snackbar.make(flContent, "欢迎回来，" + Common.userObj.getName(), Snackbar.LENGTH_LONG)
+                .show();
     }
 
     @Override
     public void loginFailure(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        Snackbar.make(flContent, s, Snackbar.LENGTH_LONG)
+                .setAction("重新登录", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        login();
+                    }
+                })
+                .show();
     }
 
 }

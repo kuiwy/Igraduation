@@ -15,7 +15,7 @@ import hello.wyk.graduation.R;
 public class MainFragment extends BaseFragment {
 
     @BindView(R.id.web_view)
-    private WebView webView;
+    WebView webView;
 
     @Override
     public int getViewId() {

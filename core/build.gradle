@@ -24,4 +24,5 @@ dependencies {
     compile project(':model')
     compile project(':api')
     compile files('libs/nineoldandroids-2.4.0.jar')
+    compile 'com.google.code.gson:gson:2.2.4'
 }
