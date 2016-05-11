@@ -1,12 +1,12 @@
 package org.wyk.core;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.wyk.model.UserObj;
 
-import org.wyk.api.LoginAPI;
-import org.wyk.api.LoginService;
+import org.wyk.api.Api;
+import org.wyk.api.Service;
+import org.wyk.core.util.Common;
 
 import retrofit.Callback;
 import retrofit.Response;
@@ -18,16 +18,16 @@ import retrofit.Retrofit;
  */
 public class LoginController {
 
-    private LoginAPI loginAPI;
+    private Api Api;
     private LoginCallBack loginCallBack;
 
     public LoginController(Context context) {
-        loginAPI = new LoginService().getLoginAPI();
+        Api = new Service().getAPI();
         loginCallBack = (LoginCallBack) context;
     }
 
     public void login(String username, String password) {
-        loginAPI.login(username, password).enqueue(new Callback<UserObj>() {
+        Api.login(username, password).enqueue(new Callback<UserObj>() {
             @Override
             public void onResponse(Response<UserObj> response, Retrofit retrofit) {
                 if (response.body() == null || response.body().getId() == -1) {

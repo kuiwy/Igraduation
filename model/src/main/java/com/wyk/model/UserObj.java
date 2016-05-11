@@ -14,9 +14,12 @@ public class UserObj implements Serializable {
 
     private int id;
     private String username;
-    private String password;
-    private String name;
+    private String nickname;
     private String imghead;
+    private int sex;
+    private String phone;
+    private String birthday;
+    private String introduction;
     private String registerday;
 
     @Override
@@ -24,10 +27,11 @@ public class UserObj implements Serializable {
         return "UserObj{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", imghead='" + imghead + '\'' +
-                ", registerday='" + registerday + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", introduction='" + introduction + '\'' +
                 '}';
     }
 
@@ -47,20 +51,20 @@ public class UserObj implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public String getName() {
-        return name;
+    public int getSex() {
+        return sex;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSex(int sex) {
+        sex = sex;
     }
 
     public String getImghead() {
@@ -69,6 +73,30 @@ public class UserObj implements Serializable {
 
     public void setImghead(String imghead) {
         this.imghead = imghead;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
     public String getRegisterday() {

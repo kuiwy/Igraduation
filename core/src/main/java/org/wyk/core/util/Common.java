@@ -1,4 +1,4 @@
-package org.wyk.core;
+package org.wyk.core.util;
 
 import com.wyk.model.UserObj;
 

@@ -25,7 +25,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="fitXY"
-                android:src="@mipmap/head_img"
+                android:src="@mipmap/none"
                 app:roundWidth="25dp"
                 app:roundHeight="25dp"/>
             <LinearLayout
@@ -39,21 +39,23 @@
                     android:layout_height="wrap_content"
                     >
                     <TextView
+                        android:id="@+id/text_nickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
-                        android:text="想做很多事"
+                        android:text="未登录"
                         android:textColor="@android:color/black"
                         android:textSize="16sp" />
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/text_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="15dp"
-                    android:text="哼哼"
+                    android:text="-"
                     android:textColor="@android:color/black"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -70,6 +72,7 @@
                 android:scaleType="fitXY"
                 android:src="@mipmap/sidebar_signature_nor"/>
             <TextView
+                android:id="@+id/text_note"
                 android:layout_marginLeft="5dp"
                 android:textSize="13sp"
                 android:textColor="#676767"
@@ -77,8 +80,7 @@
                 android:ellipsize="end"
                 android:layout_width="match_parent"
                 android:layout_marginRight="120dp"
-                android:layout_height="wrap_content"
-                android:text="黄色的树林里分出两条路 我选择了人迹更少的一条 从此决定了我一生的道路!"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
 

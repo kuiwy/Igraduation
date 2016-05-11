@@ -12,7 +12,7 @@ import hello.wyk.graduation.R;
  *
  * Created by wyk on 2015/11/23.
  */
-public class MyFragment2 extends BaseFragment {
+public class GroupFragment extends BaseFragment {
 
     private ViewPager mViewPager;
     private PagerTabStrip mViewPagerStrip;

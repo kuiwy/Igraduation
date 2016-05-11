@@ -9,7 +9,8 @@
     <color name="holo_secondary">#ff28a5c0</color>
     <color name="background_secondary">#FFEDEFEF</color>
     <color name="lv_click_color">#77AAAAAA</color>
-    
+    <color name="color_line">#E2E3E4</color>
+
     <color name="theme_blue">#03a9f4</color>
 
     <color name="btn_blue">#1E88E5</color>
@@ -17,4 +18,5 @@
     <color name="colorAccent">#FF00E5FF</color>
     <color name="colorControlNormal">#FF78909C</color>
     <color name="colorPrimary">#FF03A9F4</color>
+    <color name="material_red_500">#ef5350</color>
 </resources>

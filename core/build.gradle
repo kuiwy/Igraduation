@@ -19,10 +19,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile project(':model')
     compile project(':api')
-    compile files('libs/nineoldandroids-2.4.0.jar')
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.android.support:support-v4:23.3.0'
+
+    compile 'com.wang.avi:library:1.0.1'
+    compile 'com.nineoldandroids:library:2.4.0'
 }

@@ -14,7 +14,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:digits="QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm123456789"
-            android:text="wangyongkui"
             android:hint="Username" />
     </android.support.design.widget.TextInputLayout>
 
@@ -37,7 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:text="123456"
             android:digits="QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm123456789"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
@@ -49,6 +47,28 @@
         android:gravity="right"
         android:paddingRight="10dp"
         android:text="密码错误"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="12sp" />
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nickname"
+            android:digits="QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm123456789"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/text_nickname_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingRight="10dp"
+        android:text="昵称错误"
         android:textColor="@android:color/holo_red_light"
         android:textSize="12sp" />
 </LinearLayout>

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hello.wyk.graduation.R;
-import hello.wyk.graduation.adapter.TopicAdapter;
+import hello.wyk.graduation.adapter.ArticleAdapter;
 
 /**
  * 主页第一个Fragment
@@ -17,7 +17,7 @@ import hello.wyk.graduation.adapter.TopicAdapter;
 public class MyFragment1 extends BaseFragment {
 
     private ListView mListViewTopic;
-    private TopicAdapter mTopicAdapter;
+    private ArticleAdapter mArticleAdapter;
     private List<String> topicList;
 
     @Override
@@ -33,11 +33,11 @@ public class MyFragment1 extends BaseFragment {
 
     @Override
     public void refreshView() {
-        topicList = new ArrayList<>();
-        topicList.add("");topicList.add("");topicList.add("");topicList.add("");topicList.add("");topicList.add("");
-        topicList.add("");topicList.add("");topicList.add("");topicList.add("");topicList.add("");topicList.add("");
-        mTopicAdapter = new TopicAdapter(getActivity(),topicList);
-        mListViewTopic.setAdapter(mTopicAdapter);
+//        topicList = new ArrayList<>();
+//        topicList.add("");topicList.add("");topicList.add("");topicList.add("");topicList.add("");topicList.add("");
+//        topicList.add("");topicList.add("");topicList.add("");topicList.add("");topicList.add("");topicList.add("");
+//        mArticleAdapter = new ArticleAdapter(getActivity(),topicList);
+//        mListViewTopic.setAdapter(mArticleAdapter);
     }
 
     @Override
