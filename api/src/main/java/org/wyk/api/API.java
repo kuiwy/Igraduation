@@ -29,6 +29,10 @@ public interface Api {
     Call<UserObj> login(@Field("username") String username, @Field("password") String password);
 
     @FormUrlEncoded
+    @POST("wyk/login")
+    Call<UserObj> register(@Field("username") String username, @Field("password") String password, @Field("nickname") String nickname);
+
+    @FormUrlEncoded
     @POST("wyk/queryUserInfo")
     Call<UserObj> queryUserInfo(@Field("id") int id);
 

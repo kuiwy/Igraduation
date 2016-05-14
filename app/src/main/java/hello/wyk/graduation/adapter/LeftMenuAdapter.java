@@ -13,6 +13,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hello.wyk.graduation.R;
+import hello.wyk.graduation.util.ItemDataUtils;
 
 /**
  * 侧边栏adapter
@@ -39,6 +40,12 @@ public class LeftMenuAdapter extends MyBaseAdapter<LeftMenuItemObj> {
         holder.item_img.setImageResource(itemObj.getImg());
         holder.item_tv.setText(itemObj.getTitle());
         return convertView;
+    }
+
+    public void refresh(){
+        mListData.clear();
+        mListData.addAll(ItemDataUtils.getItemBeans());
+        notifyDataSetChanged();
     }
 
     class ViewHolder {

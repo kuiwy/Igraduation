@@ -27,6 +27,8 @@ public class GroupQuestionActivity extends BaseActivity implements GroupQuestion
     ImageView ivBack;
     @BindView(R.id.text_group_name)
     TextView textGroupName;
+    @BindView(R.id.text_num)
+    TextView textNum;
 
     GroupQuestionPagerAdapter adapter;
     GroupQuestionController controller;
@@ -50,11 +52,32 @@ public class GroupQuestionActivity extends BaseActivity implements GroupQuestion
 
     }
 
+    private void setAdapter(List<QuestionObj> list){
+        adapter = new GroupQuestionPagerAdapter(getSupportFragmentManager(), this, list);
+        textNum.setText("1/"+adapter.getCount());
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                textNum.setText((position+1)+"/"+adapter.getCount());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
     @Override
     public void querySuccess(List<QuestionObj> list) {
         textGroupName.setText(list.get(0).getGroupname());
-        adapter = new GroupQuestionPagerAdapter(getSupportFragmentManager(), this, list);
-        viewPager.setAdapter(adapter);
+        setAdapter(list);
     }
 
     @Override

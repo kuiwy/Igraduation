@@ -32,6 +32,17 @@
                 android:text="分组名"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/text_num"
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
         </RelativeLayout>
     </RelativeLayout>
     <android.support.v4.view.ViewPager

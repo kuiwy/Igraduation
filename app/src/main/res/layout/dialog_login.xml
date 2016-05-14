@@ -15,7 +15,7 @@
             android:layout_marginTop="10dp"
             android:digits="QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm123456789"
             android:text="wangyongkui"
-            android:hint="Username" />
+            android:hint="Username(6~16)" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -36,7 +36,7 @@
             android:id="@+id/edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Password(6~16)"
             android:text="123456"
             android:digits="QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm123456789"
             android:inputType="textPassword" />

@@ -3,6 +3,8 @@ package hello.wyk.graduation.util;
 
 import com.wyk.model.LeftMenuItemObj;
 
+import org.wyk.core.util.Common;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +22,11 @@ public class ItemDataUtils {
     public static List<LeftMenuItemObj> getItemBeans(){
         List<LeftMenuItemObj> itemBeans=new ArrayList<>();
         itemBeans.add(new LeftMenuItemObj(R.mipmap.ic_home_black_24dp,"主页",false));
-        itemBeans.add(new LeftMenuItemObj(R.mipmap.sidebar_decoration,"随机练习",false));
-        itemBeans.add(new LeftMenuItemObj(R.mipmap.sidebar_favorit,"分组练习",false));
-        itemBeans.add(new LeftMenuItemObj(R.mipmap.sidebar_album,"错题",false));
+        itemBeans.add(new LeftMenuItemObj(R.mipmap.ic_description_black_24dp,"随机练习",false));
+        itemBeans.add(new LeftMenuItemObj(R.mipmap.ic_class_black_24dp,"分组练习",false));
+        itemBeans.add(new LeftMenuItemObj(R.mipmap.ic_mode_edit_black_24dp,"错题",false));
+        if(Common.userObj!=null)
+            itemBeans.add(new LeftMenuItemObj(R.mipmap.ic_reply_black_24dp,"退出登录",false));
         return  itemBeans;
     }
     

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.nineoldandroids.view.ViewHelper;
 
 import org.wyk.api.ApiConfig;
-import org.wyk.core.LoginController;
+import org.wyk.core.LoginRegisterController;
 import org.wyk.core.util.Common;
 
 import java.util.HashMap;
@@ -31,7 +31,7 @@ import hello.wyk.graduation.widget.DragLayout;
 import hello.wyk.graduation.widget.RoundAngleImageView;
 
 
-public class MainActivity extends BaseActivity implements View.OnClickListener, LoginController.LoginCallBack {
+public class MainActivity extends BaseActivity implements View.OnClickListener, LoginRegisterController.LoginCallBack, LoginRegisterController.RegisterCallBack {
 
     @BindView(R.id.lv)
     ListView lv;
@@ -53,9 +53,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     TextView textNote;
 
     LeftMenuAdapter leftMenuAdapter;
-    LoginController loginController;
+    LoginRegisterController loginRegisterController;
     FragmentTransaction transaction;
-
+    public long lastClickBack = 0;
 
 
     @Override
@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void refreshView() {
-        loginController = new LoginController(this);
+        loginRegisterController = new LoginRegisterController(this);
         setStatusBar();
         leftMenuAdapter = new LeftMenuAdapter(this, ItemDataUtils.getItemBeans());
         lv.setAdapter(leftMenuAdapter);
@@ -98,14 +98,40 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         });
     }
 
-    private void refresh(){
-        if(Common.userObj!=null){
+    private void refresh() {
+        if (Common.userObj != null) {
             textNickname.setText(Common.userObj.getNickname());
             textPhone.setText(Common.userObj.getPhone());
             textNote.setText(Common.userObj.getIntroduction());
             Glide.with(this).load(ApiConfig.baseUrl + "/wyk/head/" + Common.userObj.getImghead()).into(ivIcon);
             Glide.with(this).load(ApiConfig.baseUrl + "/wyk/head/" + Common.userObj.getImghead()).into(ivHead);
+        } else {
+            textNickname.setText("未登录");
+            textPhone.setText("");
+            textNote.setText("");
+            Glide.with(this).load(R.mipmap.none).into(ivIcon);
+            Glide.with(this).load(R.mipmap.none).into(ivHead);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refresh();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis() - lastClickBack > 2000) {
+                showToast("再次点击退出应用");
+            } else {
+                moveTaskToBack(true);
+            }
+            lastClickBack = System.currentTimeMillis();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @OnClick({R.id.layout_head, R.id.iv_icon})
@@ -129,7 +155,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             login();
             return;
         }
-        switch (position){
+        switch (position) {
             case 0:
                 textTitle.setText("首页");
                 transaction = getSupportFragmentManager().beginTransaction();
@@ -143,7 +169,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     public void run() {
                         dl.close();
                     }
-                },500);
+                }, 500);
                 break;
             case 2:
                 textTitle.setText("分组练习");
@@ -151,29 +177,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 transaction.replace(flContent.getId(), new GroupFragment()).commit();
                 dl.close();
                 break;
+            case 3:
+                break;
+            case 4:
+                logout();
+                break;
         }
-        showToast(position + "");
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private void logout() {
+        Common.userObj = null;
         refresh();
-    }
-
-    public long lastClickBack = 0;
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(System.currentTimeMillis()-lastClickBack>2000){
-                showToast("再次点击退出应用");
-            } else {
-                moveTaskToBack(true);
-            }
-            lastClickBack =System.currentTimeMillis();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+        leftMenuAdapter.refresh();
     }
 
     private void login() {
@@ -181,18 +196,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void onPositiveButton(HashMap<String, String> map) {
                 super.onPositiveButton(map);
-                loginController.login(map.get("username"), map.get("password"));
+                loginRegisterController.login(map.get("username"), map.get("password"));
             }
 
             @Override
             public void onNegativeButton(Object o) {
                 super.onNegativeButton(o);
-                DialogUtils.registerDialog(MainActivity.this, new DialogUtils.DialogCallBack<HashMap<String, String>>() {
-                    @Override
-                    public void onPositiveButton(HashMap<String, String> stringStringHashMap) {
-                        super.onPositiveButton(stringStringHashMap);
-                    }
-                });
+                register();
+            }
+        });
+    }
+
+    private void register() {
+        DialogUtils.registerDialog(MainActivity.this, new DialogUtils.DialogCallBack<HashMap<String, String>>() {
+            @Override
+            public void onPositiveButton(HashMap<String, String> map) {
+                super.onPositiveButton(map);
+                loginRegisterController.register(map.get("username"), map.get("password"),map.get("nickname"));
             }
         });
     }
@@ -202,6 +222,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         Snackbar.make(flContent, "欢迎回来，" + Common.userObj.getNickname(), Snackbar.LENGTH_LONG)
                 .show();
         refresh();
+        leftMenuAdapter.refresh();
     }
 
     @Override
@@ -211,6 +232,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     @Override
                     public void onClick(View v) {
                         login();
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void registerSuccess() {
+        Snackbar.make(flContent, "注册成功，" + Common.userObj.getNickname(), Snackbar.LENGTH_LONG)
+                .show();
+        refresh();
+        leftMenuAdapter.refresh();
+    }
+
+    @Override
+    public void registerFailure(String s) {
+        Snackbar.make(flContent, s, Snackbar.LENGTH_LONG)
+                .setAction("重新注册", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        register();
                     }
                 })
                 .show();
