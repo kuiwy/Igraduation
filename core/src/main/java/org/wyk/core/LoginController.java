@@ -18,16 +18,16 @@ import retrofit.Retrofit;
  */
 public class LoginController {
 
-    private Api Api;
+    private Api api;
     private LoginCallBack loginCallBack;
 
     public LoginController(Context context) {
-        Api = new Service().getAPI();
+        api = new Service().getAPI();
         loginCallBack = (LoginCallBack) context;
     }
 
     public void login(String username, String password) {
-        Api.login(username, password).enqueue(new Callback<UserObj>() {
+        api.login(username, password).enqueue(new Callback<UserObj>() {
             @Override
             public void onResponse(Response<UserObj> response, Retrofit retrofit) {
                 if (response.body() == null || response.body().getId() == -1) {

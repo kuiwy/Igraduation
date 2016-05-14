@@ -3,6 +3,7 @@ package hello.wyk.graduation.activity;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -12,8 +13,8 @@ import com.bumptech.glide.Glide;
 import com.nineoldandroids.view.ViewHelper;
 
 import org.wyk.api.ApiConfig;
-import org.wyk.core.util.Common;
 import org.wyk.core.LoginController;
+import org.wyk.core.util.Common;
 
 import java.util.HashMap;
 
@@ -22,8 +23,8 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import hello.wyk.graduation.R;
 import hello.wyk.graduation.adapter.LeftMenuAdapter;
-import hello.wyk.graduation.fragment.MainFragment;
 import hello.wyk.graduation.fragment.GroupFragment;
+import hello.wyk.graduation.fragment.MainFragment;
 import hello.wyk.graduation.util.DialogUtils;
 import hello.wyk.graduation.util.ItemDataUtils;
 import hello.wyk.graduation.widget.DragLayout;
@@ -158,6 +159,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void onResume() {
         super.onResume();
         refresh();
+    }
+
+    public long lastClickBack = 0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(System.currentTimeMillis()-lastClickBack>2000){
+                showToast("再次点击退出应用");
+            } else {
+                moveTaskToBack(true);
+            }
+            lastClickBack =System.currentTimeMillis();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void login() {
