@@ -32,6 +32,12 @@
             android:screenOrientation="portrait"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".activity.GroupQuestionActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" >
+        </activity>
+
 
         <activity android:name="com.yongchun.library.view.ImageSelectorActivity"/>
         <activity android:name="com.yongchun.library.view.ImagePreviewActivity"/>

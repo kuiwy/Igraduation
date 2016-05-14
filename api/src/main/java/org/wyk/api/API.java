@@ -3,6 +3,8 @@ package org.wyk.api;
 
 import com.squareup.okhttp.RequestBody;
 import com.wyk.model.ArticleObj;
+import com.wyk.model.GroupObj;
+import com.wyk.model.QuestionObj;
 import com.wyk.model.UserObj;
 
 import java.util.List;
@@ -42,5 +44,14 @@ public interface Api {
     @POST("wyk/getArticleList")
     Call<List<ArticleObj>> getArticleList(@Field("offset") int offset);
 
+    @POST("wyk/getRandomQuestion")
+    Call<QuestionObj> getRandomQuestion();
+
+    @POST("wyk/queryGroup")
+    Call<List<GroupObj>> getGroup();
+
+    @FormUrlEncoded
+    @POST("wyk/getGroupQuestion")
+    Call<List<QuestionObj>> getGroupQuestion(@Field("id") int id);
 
 }

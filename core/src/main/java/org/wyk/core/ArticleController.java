@@ -19,21 +19,21 @@ import retrofit.Retrofit;
  * Created by wyk on 2016/5/9.
  */
 public class ArticleController {
-    private Api Api;
+    private Api api;
     private ArticleCallBack callBack;
 
     public ArticleController(Context context) {
-        Api = new Service().getAPI();
+        api = new Service().getAPI();
         callBack = (ArticleCallBack) context;
     }
 
     public ArticleController(Fragment fragment) {
-        Api = new Service().getAPI();
+        api = new Service().getAPI();
         callBack = (ArticleCallBack) fragment;
     }
 
     public void getArticleList(int offset) {
-        Api.getArticleList(offset).enqueue(new Callback<List<ArticleObj>>() {
+        api.getArticleList(offset).enqueue(new Callback<List<ArticleObj>>() {
             @Override
             public void onResponse(Response<List<ArticleObj>> response, Retrofit retrofit) {
                 callBack.success(response.body());
