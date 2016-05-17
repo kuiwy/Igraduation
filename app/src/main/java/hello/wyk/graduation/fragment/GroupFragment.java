@@ -19,8 +19,7 @@ import hello.wyk.graduation.R;
 import hello.wyk.graduation.adapter.GroupPagerAdapter;
 
 /**
- * 主页第二个Fragment
- * <p/>
+ * 展示所有分组
  * Created by wyk on 2015/11/23.
  */
 public class GroupFragment extends BaseFragment implements GroupCallBack {
@@ -37,7 +36,7 @@ public class GroupFragment extends BaseFragment implements GroupCallBack {
 
     @Override
     public int getViewId() {
-        return R.layout.fragment_2;
+        return R.layout.fragment_group;
     }
 
 

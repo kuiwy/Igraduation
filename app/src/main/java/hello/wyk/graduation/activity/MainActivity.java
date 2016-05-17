@@ -23,8 +23,10 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import hello.wyk.graduation.R;
 import hello.wyk.graduation.adapter.LeftMenuAdapter;
+import hello.wyk.graduation.fragment.ErrorQuestionFragment;
 import hello.wyk.graduation.fragment.GroupFragment;
 import hello.wyk.graduation.fragment.MainFragment;
+import hello.wyk.graduation.fragment.RandomQuestionFragment;
 import hello.wyk.graduation.util.DialogUtils;
 import hello.wyk.graduation.util.ItemDataUtils;
 import hello.wyk.graduation.widget.DragLayout;
@@ -163,13 +165,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 dl.close();
                 break;
             case 1:
-                goActivity(QuestionActivity.class);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        dl.close();
-                    }
-                }, 500);
+                textTitle.setText("随机练习");
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(flContent.getId(), new RandomQuestionFragment()).commit();
+                dl.close();
+//                goActivity(QuestionActivity.class);
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        dl.close();
+//                    }
+//                }, 500);
                 break;
             case 2:
                 textTitle.setText("分组练习");
@@ -178,6 +184,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 dl.close();
                 break;
             case 3:
+                textTitle.setText("错题");
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(flContent.getId(), new ErrorQuestionFragment()).commit();
+                dl.close();
                 break;
             case 4:
                 logout();

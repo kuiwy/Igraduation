@@ -21,10 +21,10 @@ import hello.wyk.graduation.R;
 import hello.wyk.graduation.widget.SmoothCheckBox;
 
 /**
- * 随机练习
+ * 题目详情-错题
  * Created by wyk on 2016/5/11.
  */
-public class QuestionActivity extends BaseActivity implements RandomQuestionController.RandomQuestionCallBack {
+public class QuestionDetailActivity extends BaseActivity {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -62,24 +62,20 @@ public class QuestionActivity extends BaseActivity implements RandomQuestionCont
     TextView ans;
     @BindView(R.id.layout_ans)
     LinearLayout layoutAns;
-    @BindView(R.id.btn_change)
-    TextView btnChange;
 
-    RandomQuestionController randomQuestionController;
     private String checkAns;
     private QuestionObj questionObj;
 
     @Override
     public int getContentViewId() {
-        return R.layout.layout_question;
+        return R.layout.activity_detail_question;
     }
 
     @Override
     public void refreshView() {
         setStatusBar();
-        randomQuestionController = new RandomQuestionController(this);
-        randomQuestionController.getRandomQuestion();
-        btnChange.setClickable(false);
+        questionObj = (QuestionObj) getInActivitySerValue();
+        refresh(questionObj);
     }
 
     @Override
@@ -87,7 +83,7 @@ public class QuestionActivity extends BaseActivity implements RandomQuestionCont
 
     }
 
-    @OnClick({R.id.iv_back, R.id.layout_a, R.id.layout_b, R.id.layout_c, R.id.layout_d, R.id.btn_change})
+    @OnClick({R.id.iv_back, R.id.layout_a, R.id.layout_b, R.id.layout_c, R.id.layout_d})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -112,10 +108,6 @@ public class QuestionActivity extends BaseActivity implements RandomQuestionCont
                 checkBoxD.setChecked(true);
                 checkAns = "4";
                 check();
-                break;
-            case R.id.btn_change:
-                randomQuestionController.getRandomQuestion();
-                btnChange.setClickable(false);
                 break;
         }
     }
@@ -162,17 +154,5 @@ public class QuestionActivity extends BaseActivity implements RandomQuestionCont
         checkBoxC.setChecked(false);
         checkBoxD.setChecked(false);
         layoutAns.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void getQuestionSuccess(QuestionObj question) {
-        questionObj = question;
-        btnChange.setClickable(true);
-        refresh(question);
-    }
-
-    @Override
-    public void failure(String s) {
-        btnChange.setClickable(true);
     }
 }

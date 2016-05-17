@@ -29,7 +29,7 @@ public interface Api {
     Call<UserObj> login(@Field("username") String username, @Field("password") String password);
 
     @FormUrlEncoded
-    @POST("wyk/login")
+    @POST("wyk/register")
     Call<UserObj> register(@Field("username") String username, @Field("password") String password, @Field("nickname") String nickname);
 
     @FormUrlEncoded
@@ -57,5 +57,13 @@ public interface Api {
     @FormUrlEncoded
     @POST("wyk/getGroupQuestion")
     Call<List<QuestionObj>> getGroupQuestion(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("wyk/updateErrorQuestion")
+    Call<String> updateErrorQuestion(@Field("userid") int userid,@Field("questionid") int questionid);
+
+    @FormUrlEncoded
+    @POST("wyk/queryErrorQuestion")
+    Call<List<QuestionObj>> queryErrorQuestion(@Field("userid") int userid);
 
 }

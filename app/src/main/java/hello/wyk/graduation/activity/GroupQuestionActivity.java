@@ -17,6 +17,7 @@ import hello.wyk.graduation.R;
 import hello.wyk.graduation.adapter.GroupQuestionPagerAdapter;
 
 /**
+ * 分组题目详情，viewPager展示所有组里的题目
  * Created by wyk on 2016/5/13.
  */
 public class GroupQuestionActivity extends BaseActivity implements GroupQuestionController.GroupQuestionCallBack {

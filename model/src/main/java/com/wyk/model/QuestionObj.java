@@ -17,6 +17,7 @@ public class QuestionObj implements Serializable {
     int groupid;
     String groupname;
     String createtime;
+    int errornum;
 
     public String getStringType(){
         switch (type){
@@ -118,5 +119,13 @@ public class QuestionObj implements Serializable {
 
     public void setCreatetime(String createtime) {
         this.createtime = createtime;
+    }
+
+    public int getErrornum() {
+        return errornum;
+    }
+
+    public void setErrornum(int errornum) {
+        this.errornum = errornum;
     }
 }

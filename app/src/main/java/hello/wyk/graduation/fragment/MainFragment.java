@@ -21,8 +21,7 @@ import me.fangx.haorefresh.HaoRecyclerView;
 import me.fangx.haorefresh.LoadMoreListener;
 
 /**
- * 主页第一个Fragment
- * <p/>
+ * 文章列表
  * Created by wyk on 2015/11/23.
  */
 public class MainFragment extends BaseFragment implements ArticleController.ArticleCallBack {

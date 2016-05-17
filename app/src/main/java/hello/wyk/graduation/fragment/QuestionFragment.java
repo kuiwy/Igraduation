@@ -8,12 +8,15 @@ import android.widget.TextView;
 
 import com.wyk.model.QuestionObj;
 
+import org.wyk.core.ErrorQuestionController;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import hello.wyk.graduation.R;
 import hello.wyk.graduation.widget.SmoothCheckBox;
 
 /**
+ * 某个题目集中的一个问题
  * Created by wyk on 2016/5/13.
  */
 public class QuestionFragment extends BaseFragment {
@@ -130,6 +133,7 @@ public class QuestionFragment extends BaseFragment {
         ans.setText(question.getAns());
         ansYou.setText(checkAns);
         if(!checkAns.equals(question.getAns())){
+            new ErrorQuestionController().upLoadErrorQuestion(question.getId());
             ansYou.setTextColor(Color.RED);
         } else {
             ansYou.setTextColor(Color.GREEN);

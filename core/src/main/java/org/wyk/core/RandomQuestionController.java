@@ -1,6 +1,7 @@
 package org.wyk.core;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 
 import com.wyk.model.QuestionObj;
 
@@ -21,6 +22,11 @@ public class RandomQuestionController {
     private RandomQuestionCallBack callBack;
 
     public RandomQuestionController(Context context) {
+        api = new Service().getAPI();
+        callBack = (RandomQuestionCallBack) context;
+    }
+
+    public RandomQuestionController(Fragment context) {
         api = new Service().getAPI();
         callBack = (RandomQuestionCallBack) context;
     }

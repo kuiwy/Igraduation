@@ -10,7 +10,7 @@ import butterknife.BindView;
 import hello.wyk.graduation.R;
 
 /**
- *
+ *文章详情
  * Created by wyk on 2016/5/10.
  */
 public class ArticleFragment extends BaseFragment {

@@ -1,4 +1,4 @@
-package hello.wyk.graduation.activity;
+package hello.wyk.graduation.fragment;
 
 import android.graphics.Color;
 import android.text.Spannable;
@@ -18,18 +18,15 @@ import org.wyk.core.RandomQuestionController;
 import butterknife.BindView;
 import butterknife.OnClick;
 import hello.wyk.graduation.R;
+import hello.wyk.graduation.activity.BaseActivity;
 import hello.wyk.graduation.widget.SmoothCheckBox;
 
 /**
  * 随机练习
  * Created by wyk on 2016/5/11.
  */
-public class QuestionActivity extends BaseActivity implements RandomQuestionController.RandomQuestionCallBack {
+public class RandomQuestionFragment extends BaseFragment implements RandomQuestionController.RandomQuestionCallBack {
 
-    @BindView(R.id.iv_back)
-    ImageView ivBack;
-    @BindView(R.id.rl_title)
-    RelativeLayout rlTitle;
     @BindView(R.id.text_question)
     TextView textQuestion;
     @BindView(R.id.check_box)
@@ -70,13 +67,12 @@ public class QuestionActivity extends BaseActivity implements RandomQuestionCont
     private QuestionObj questionObj;
 
     @Override
-    public int getContentViewId() {
-        return R.layout.layout_question;
+    public int getViewId() {
+        return R.layout.fragment_random_question;
     }
 
     @Override
     public void refreshView() {
-        setStatusBar();
         randomQuestionController = new RandomQuestionController(this);
         randomQuestionController.getRandomQuestion();
         btnChange.setClickable(false);
@@ -87,12 +83,9 @@ public class QuestionActivity extends BaseActivity implements RandomQuestionCont
 
     }
 
-    @OnClick({R.id.iv_back, R.id.layout_a, R.id.layout_b, R.id.layout_c, R.id.layout_d, R.id.btn_change})
+    @OnClick({R.id.layout_a, R.id.layout_b, R.id.layout_c, R.id.layout_d, R.id.btn_change})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
-                finish();
-                break;
             case R.id.layout_a:
                 checkBoxA.setChecked(true);
                 checkAns = "1";

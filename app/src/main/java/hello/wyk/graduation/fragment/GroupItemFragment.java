@@ -17,8 +17,7 @@ import hello.wyk.graduation.activity.GroupQuestionActivity;
 import hello.wyk.graduation.adapter.GroupAdapter;
 
 /**
- * GroupItemViewPager
- * <p/>
+ * 分组中每一个类别组下的题目集
  * Created by wyk on 2015/11/23.
  */
 public class GroupItemFragment extends BaseFragment {
@@ -41,7 +40,7 @@ public class GroupItemFragment extends BaseFragment {
 
     @Override
     public int getViewId() {
-        return R.layout.fragment_1;
+        return R.layout.fragment_group_item;
     }
 
     @Override

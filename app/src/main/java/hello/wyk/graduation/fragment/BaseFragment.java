@@ -12,7 +12,6 @@ import hello.wyk.graduation.activity.BaseActivity;
 
 /**
  * 所有Fragment的基类
- *
  * Created by wyk on 2015/12/3.
  */
 public abstract class BaseFragment extends Fragment {

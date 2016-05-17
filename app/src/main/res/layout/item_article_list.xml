@@ -33,7 +33,6 @@
                     android:id="@+id/text_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="程序员必备啊啊啊"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -43,7 +42,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="2016-05-08"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -59,7 +57,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:lines="2"
-                    android:text="你好你好你好你好"
                     android:textSize="12sp" />
             </LinearLayout>
         </com.balysv.materialripple.MaterialRippleLayout>
