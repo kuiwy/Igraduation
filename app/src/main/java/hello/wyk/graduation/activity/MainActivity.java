@@ -199,6 +199,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         Common.userObj = null;
         refresh();
         leftMenuAdapter.refresh();
+        textTitle.setText("首页");
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(flContent.getId(), new MainFragment()).commit();
+        dl.close();
     }
 
     private void login() {
