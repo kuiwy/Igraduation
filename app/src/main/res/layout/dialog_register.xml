@@ -58,7 +58,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nickname(6~16)"
-            android:digits="QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm123456789"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
